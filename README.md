@@ -38,4 +38,8 @@
 
 ## Funcionamiento del envío de mail al reguistrarse un nuevo usuario y hacer una compra
 
-![Muestra captura de mail](https://github.com/ayelenramonda/backend)
+![Muestra captura de mail](https://github.com/ayelenramonda/BackendEcommerce/blob/main/muestras/capturamail.png)
+
+## Muestra de la pantalla del chat
+
+![Muestra captura del chat](https://github.com/ayelenramonda/BackendEcommerce/blob/main/muestras/mensajes.png)
