@@ -54,6 +54,9 @@ app.get('/', async (req, res, next) => {
 		next(err);
 	}
 });
+const viewsFolderPath = path.resolve(__dirname, './views');
+app.set('view engine', 'ejs');
+app.set('views', viewsFolderPath);
 
 app.post('/', saveMsgController);
 
@@ -123,10 +126,6 @@ app.use(passport.session());
 
 passport.use('login', loginFunc);
 passport.use('signup', signUpFunc);
-
-const viewsFolderPath = path.resolve(__dirname, './views');
-app.set('view engine', 'ejs');
-app.set('views', viewsFolderPath);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
