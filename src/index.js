@@ -11,6 +11,7 @@ import os from 'os';
 import { args } from './config/index.js';
 import { infoLogger, warnLogger, errorLogger } from './logs/index.js';
 import path from 'path';
+import { fileURLToPath } from 'url';
 import cors from 'cors';
 import http from 'http';
 import { Server as IOServer } from 'socket.io';
@@ -19,6 +20,9 @@ import { saveMsg } from './persistencia/daos/factory.js';
 import { info } from './docs/info.js';
 import swaggerUI from 'swagger-ui-express';
 import swaggerJSDoc from 'swagger-jsdoc';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
 

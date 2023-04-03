@@ -3,7 +3,7 @@ import { Strategy as LocalStrategy } from 'passport-local';
 import { UserModel } from '../models/user.js';
 import { createTransport } from 'nodemailer';
 import dotenv from 'dotenv';
-import { infoLogger, warnLogger, errorLogger } from '../logs/index';
+import { infoLogger, warnLogger, errorLogger } from '../logs/index.js';
 
 dotenv.config();
 

@@ -3,12 +3,11 @@
 	"version": "1.0.0",
 	"description": "",
 	"main": "index.js",
+	"type": "module",
 	"scripts": {
-		"build": "babel src --out-dir dist",
-		"start": "nodemon --exec babel-node ./src/index.js",
-		"start:original": "node ./dist/index.js",
-		"dev": "nodemon --exec babel-node ./src/index.js",
-		"test": "echo \"Error: no test specified\" && exit 1"
+		"start": "node ./src/index.js",
+		"test": "npm run build && npm run start",
+		"dev": "nodemon ./src/index.js"
 	},
 	"repository": {
 		"type": "git",
@@ -43,10 +42,6 @@
 		"yargs": "^17.6.2"
 	},
 	"devDependencies": {
-		"@babel/cli": "^7.19.3",
-		"@babel/core": "^7.20.2",
-		"@babel/node": "^7.20.2",
-		"@babel/preset-env": "^7.20.2",
 		"nodemon": "^2.0.20"
 	}
 }

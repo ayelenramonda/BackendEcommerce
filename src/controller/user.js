@@ -1,5 +1,5 @@
 import passport from 'passport';
-import { UserModel } from '../models/user';
+import { UserModel } from '../models/user.js';
 
 const passportOptions = { badRequestMessage: 'falta usuario/pass' };
 
