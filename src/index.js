@@ -48,12 +48,13 @@ app.get('/', async (req, res, next) => {
 	try {
 		let fileData = await getAllControllerMsg();
 		//console.log(fileData);
-		res.render('index', { fileData });
+		res.render('./index', { fileData });
 	} catch (err) {
 		console.log(err);
 		next(err);
 	}
 });
+
 const viewsFolderPath = path.resolve(__dirname, './views');
 app.set('view engine', 'ejs');
 app.set('views', viewsFolderPath);
