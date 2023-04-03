@@ -61,41 +61,6 @@ app.set('views', viewsFolderPath);
 
 app.post('/', saveMsgController);
 
-const numsCPUs = os.cpus().length;
-const { puerto, modo } = args;
-
-if (modo === 'cluster' && cluster.isPrimary) {
-	infoLogger.info(`Cantidad de nucleos del sistema: ${numsCPUs}`);
-	infoLogger.info(`PID MASTER: ${process.pid}`);
-	warnLogger.warn(`PID MASTER: ${process.pid}`);
-	errorLogger.error(`PID MASTER: ${process.pid}`);
-	for (let i = 0; i < numsCPUs; i++) {
-		cluster.fork();
-	}
-	cluster.on('exit', (worker, code) => {
-		infoLogger.info(`Worker ${worker.process.pid} with code ${code}`);
-		cluster.fork();
-	});
-} else {
-	initDb();
-	infoLogger.info('conenctado a la db');
-
-	httpServer.listen(puerto, () => {
-		infoLogger.info(
-			` PID WORKER ${process.pid} Servidor express escuchando en el puerto ${puerto}`
-		);
-	});
-
-	app.use((err, req, res, next) => {
-		const status = err.status || 500;
-		const message = err.message || 'Internal Server Error';
-
-		res.status(status).json({
-			message
-		});
-	});
-}
-
 // tiempo de sesion
 const ttlSeconds = 600;
 
@@ -131,3 +96,38 @@ passport.use('signup', signUpFunc);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use('/api', rutaPrincipal);
+
+const numsCPUs = os.cpus().length;
+const { puerto, modo } = args;
+
+if (modo === 'cluster' && cluster.isPrimary) {
+	infoLogger.info(`Cantidad de nucleos del sistema: ${numsCPUs}`);
+	infoLogger.info(`PID MASTER: ${process.pid}`);
+	warnLogger.warn(`PID MASTER: ${process.pid}`);
+	errorLogger.error(`PID MASTER: ${process.pid}`);
+	for (let i = 0; i < numsCPUs; i++) {
+		cluster.fork();
+	}
+	cluster.on('exit', (worker, code) => {
+		infoLogger.info(`Worker ${worker.process.pid} with code ${code}`);
+		cluster.fork();
+	});
+} else {
+	initDb();
+	infoLogger.info('conenctado a la db');
+
+	httpServer.listen(puerto, () => {
+		infoLogger.info(
+			` PID WORKER ${process.pid} Servidor express escuchando en el puerto ${puerto}`
+		);
+	});
+
+	app.use((err, req, res, next) => {
+		const status = err.status || 500;
+		const message = err.message || 'Internal Server Error';
+
+		res.status(status).json({
+			message
+		});
+	});
+}
