@@ -81,7 +81,7 @@ const StoreOptions = {
 	}
 };
 
-//const PORT = 8080;
+const PORT = (PORT = process.env.PORT || 8080);
 
 app.use('/docs', swaggerUI.serve, swaggerUI.setup(specs));
 app.use(express.static('public'));
@@ -98,8 +98,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/api', rutaPrincipal);
 
 const numsCPUs = os.cpus().length;
-const { puerto } = args;
-const PORT = (PORT = process.env.PORT || 8080);
+const { modo } = args;
 
 if (modo === 'cluster' && cluster.isPrimary) {
 	infoLogger.info(`Cantidad de nucleos del sistema: ${numsCPUs}`);
@@ -117,10 +116,8 @@ if (modo === 'cluster' && cluster.isPrimary) {
 	initDb();
 	infoLogger.info('conenctado a la db');
 
-	httpServer.listen(puerto, () => {
-		infoLogger.info(
-			` PID WORKER ${process.pid} Servidor express escuchando en el puerto ${puerto}`
-		);
+	httpServer.listen(PORT, () => {
+		infoLogger.info(` PID WORKER ${process.pid} Servidor express escuchando en el puerto ${PORT}`);
 	});
 
 	app.use((err, req, res, next) => {
