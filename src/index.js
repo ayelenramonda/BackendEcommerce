@@ -98,7 +98,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/api', rutaPrincipal);
 
 const numsCPUs = os.cpus().length;
-const { puerto, modo } = args;
+const { puerto } = args;
+const PORT = (PORT = process.env.PORT || 8080);
 
 if (modo === 'cluster' && cluster.isPrimary) {
 	infoLogger.info(`Cantidad de nucleos del sistema: ${numsCPUs}`);
