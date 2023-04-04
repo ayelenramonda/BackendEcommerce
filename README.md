@@ -13,7 +13,7 @@
 
 ## Ruta para acceder al chat
 
-- http://localhost:8080/docs/
+- http://localhost:8080
 
 ## Tecnologías utilizadas
 
