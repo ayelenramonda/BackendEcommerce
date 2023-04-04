@@ -27,6 +27,7 @@ const __dirname = path.dirname(__filename);
 const app = express();
 
 const specs = swaggerJSDoc(info);
+const PORT = (PORT = process.env.PORT || 8080);
 
 const httpServer = http.createServer(app);
 const io = new IOServer(httpServer);
@@ -80,8 +81,6 @@ const StoreOptions = {
 		maxAge: ttlSeconds * 1000
 	}
 };
-
-const PORT = (PORT = process.env.PORT || 8080);
 
 app.use('/docs', swaggerUI.serve, swaggerUI.setup(specs));
 app.use(express.static('public'));
