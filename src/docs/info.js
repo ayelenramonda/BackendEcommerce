@@ -9,10 +9,10 @@ export const info = {
 		servers: [
 			{
 				url: 'http://localhost:8080'
+			},
+			{
+				url: 'https://backendecommerce-production-c466.up.railway.app/'
 			}
-			// {
-			//     url: 'https://railway.app/myapp'
-			// }
 		]
 	},
 	apis: ['./src/docs/*.yml']
